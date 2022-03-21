@@ -1,0 +1,52 @@
+###
+GET http://127.0.0.1:3002/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsIm5hbWEiOiJ4eHh4IHl5eXkiLCJ1c2VybmFtZSI6ImEiLCJpYXQiOjE2NDc3NzE2OTMsImV4cCI6MTY0Nzc3MTcxOH0.xyi7E4MBCbpEOVDHEU3ULHgAFmhc3mC2r8GhmJzkZZA
+###
+DELETE  http://127.0.0.1:3002/user/2
+###
+POST http://127.0.0.1:3002/user/login
+Content-Type: application/json
+
+{
+    "username":"a",
+    "password":"a"
+}
+###
+DELETE  http://127.0.0.1:3002/user/logout
+###
+
+GET http://127.0.0.1:3002/user/token
+###
+GET http://127.0.0.1:3002/user/33
+###
+POST http://127.0.0.1:3002/user 
+Content-Type: application/json
+
+{
+    "nama":"Syahril Syamsuddin",
+    "username":"aa",
+    "password":"aa",
+    "ulangpassword":"aa",
+    "nohp":"081355492003",
+    "email":"syahri@dpmkyhk.com",
+    "kd_lvl1": 1,
+    "kd_lvl2": 1,
+    "kd_kampung": 2,
+    "kd_distrik": 1
+}
+###
+PATCH  http://127.0.0.1:3002/user/3
+Content-Type: application/json
+{
+    "nama":"xxxxxx",
+    "username":"333333333",
+    "password":"dasdadxsacsd",
+    "nohp":"00780as78780",
+    "email":"adasddsad",
+    "kd_lvl1": 1,
+    "kd_lvl2": 2,
+    "kd_kampung": 22,
+    "kd_distrik": 11
+}
+
+
