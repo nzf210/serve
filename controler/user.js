@@ -1,15 +1,13 @@
-// import user_qry from "../models/model.user.js";
-// import mkampung_qry from "../models/model.mKampung.js";
-
 import bcrypt from "bcrypt";
-import { user_qry, mkamdis_qry } from "../models/index.js";
+import { user_qry, mkamdis_qry, mlvluser_qry, v_user_qry } from "../models/index.js";
 import jwt from "jsonwebtoken";
 
 export const getAllUser = async (req, res) => {
     try {
-        const datauser = await user_qry.findAll({
-            attributes: ['id', 'nama', 'username', 'kd_lvl1', 'kd_lvl2', 'kd_kampung', 'kd_distrik'],
-            include: [{ model: mkamdis_qry, attributes: ['kampung', 'distrik'] }]
+        const datauser = await v_user_qry.findAll({
+            attributes: ['id', 'nama', 'username', 'password', 'nohp', 'email', 'lvl_user', 'lvl_instansi', 'kampung', 'distrik'],
+            order: [['distrik', 'ASC'], ['kampung', 'ASC'], ['nama', 'ASC']]
+            // ,            include: [{ model: mkamdis_qry, attributes: ['kampung', 'distrik'] }, { model: mlvluser_qry, attributes: ['level'] }]
         });
         res.json(datauser);
     } catch (e) { res.json({ info: e.message }) }
@@ -17,25 +15,38 @@ export const getAllUser = async (req, res) => {
 
 export const getUserById = async (req, res) => {
     try {
-        const datauser = await user_qry.findAll(
+        const datauser = await v_user_qry.findAll(
             { where: { id: req.params.id } });
-        res.json(datauser[0]);
+        if (datauser.length === 0) {
+            res.json({ info: 'Data tidak di temukan' })
+        } else { res.json(datauser[0]); }
     } catch (error) { res.json({ info: error.message }) }
 };
 
 export const createUser = async (req, res) => {
     try {
-        const datauser = await user_qry.create(req.body);
-        res.json({ "info": "User Berhasil di Buat" });
+        await user_qry.create(req.body);
+        if (req.body.kd_lvl1 === '') {
+            res.json({ info: "Level Instansi Belum di pilih" });
+            return;
+        }
+        if (req.body.kd_lvl2 === '') {
+            res.json({ "info": "Level Pengguna Belum di pilih" });
+            return;
+        }
+        res.json({ info: "Pengguna Baru Berhasil di tambah ... " });
     } catch (error) { res.json({ info: error.message }) }
 };
 
 export const updateUser = async (req, res) => {
+    const salt = await bcrypt.genSalt();
+    const hasspassword = await bcrypt.hash(req.body.password, salt);
     try {
-        const datauser = await user_qry.update(req.body, {
-            where: { id: req.params.id }
-        });
-        res.json({ "info": "User Berhasil di Ubah" });
+        await user_qry.update({ password: hasspassword, nama: req.body.nama, username: req.body.username, nohp: req.body.nohp, email: req.body.email },
+            {
+                where: { id: req.params.id }
+            });
+        res.json({ info: "User Berhasil di Ubah" });
     } catch (e) {
         res.json({ info: e.message })
     }
@@ -49,7 +60,7 @@ export const deleteUser = async (req, res) => {
             }
         });
         res.json({
-            "info": "User Berhasil di Hapus"
+            info: "User Berhasil di Hapus"
         });
     } catch (error) {
         res.json({ info: error.message })
@@ -58,7 +69,8 @@ export const deleteUser = async (req, res) => {
 
 export const Register = async (req, res) => {
     const { nama, username, email, password, ulangpassword, nohp, kd_lvl1, kd_lvl2, kd_kampung, kd_distrik } = req.body;
-    if (password !== ulangpassword) return res.status(400).json({ info: "Password dan Ulang Pasword tidak sama" });
+
+    if (password !== ulangpassword) { res.status(401).json({ info: "Password dan Ulang Pasword tidak sama" }); return; }
     const salt = await bcrypt.genSalt();
     const hasspassword = await bcrypt.hash(password, salt);
 
@@ -66,7 +78,7 @@ export const Register = async (req, res) => {
         const user_ = await user_qry.findAll({
             where: { username: username }
         });
-        if (user_.length !== 0) { return res.status(400).json({ info: "Username sudah ada yang gunakan" }); }
+        if (user_.length !== 0) { res.status(402).json({ info: "Username sudah ada yang gunakan" }); return; }
     } catch (e) { console.log(e) }
 
     try {

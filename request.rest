@@ -17,22 +17,17 @@ DELETE  http://127.0.0.1:3002/user/logout
 
 GET http://127.0.0.1:3002/user/token
 ###
-GET http://127.0.0.1:3002/user/33
+GET http://127.0.0.1:3002/mbams
 ###
-POST http://127.0.0.1:3002/user 
+GET http://127.0.0.1:3002/mbams/1
+
+###
+PATCH  http://127.0.0.1:3002/mbams
 Content-Type: application/json
 
 {
-    "nama":"Syahril Syamsuddin",
-    "username":"aa",
-    "password":"aa",
-    "ulangpassword":"aa",
-    "nohp":"081355492003",
-    "email":"syahri@dpmkyhk.com",
-    "kd_lvl1": 1,
-    "kd_lvl2": 1,
-    "kd_kampung": 2,
-    "kd_distrik": 1
+    "id":1,
+    "nama":"PUMEKEN HESELO Syahril Syamsuddin"
 }
 ###
 PATCH  http://127.0.0.1:3002/user/3

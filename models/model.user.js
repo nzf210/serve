@@ -3,6 +3,7 @@ import db from "../config/database.js";
 //import mkampung_qry from "./model.mKampung.js";
 //import mdistrik_qry from "./model.mDistrik.js";
 import mkamdis_qry from "./model.mKamDis.js";
+import mlvluser_qry from "./model.mLevelUser.js";
 
 
 const { DataTypes } = Sequelize;
@@ -44,11 +45,11 @@ const user_qry = db.define('m_user', {
     },
     kd_kampung: {
         type: dt.INTEGER,
-        allowNull: false
+        defaultValue: '0'
     },
     kd_distrik: {
         type: dt.INTEGER,
-        allowNull: false
+        defaultValue: '0'
     },
     refresh_token: {
         type: dt.TEXT
@@ -69,11 +70,17 @@ const user_qry = db.define('m_user', {
     schema: 'web_dpmk'
 })
 
-user_qry.hasOne(mkamdis_qry, { foreignKey: 'kd_kampung' });
+//user_qry.hasOne(mkamdis_qry, { foreignKey: 'kd_kampung' });
 user_qry.belongsTo(mkamdis_qry, { foreignKey: 'kd_kampung' });
-// user_qry.hasOne(mkampung_qry, { foreignKey: 'kd_kampung' });
-// user_qry.belongsTo(mkampung_qry, { foreignKey: 'kd_kampung' });
-// user_qry.hasOne(mdistrik_qry, { foreignKey: 'kd_distrik' });
-// user_qry.belongsTo(mdistrik_qry, { foreignKey: 'kd_distrik' });
-
+// mkamdis_qry.hasOne(user_qry, { foreignKey: 'kd_kampung' });
+// user_qry.belongsTo(mkamdis_qry, { foreignKey: 'kd_kampung' });
+// mkamdis_qry.belongsTo(user_qry, { foreignKey: 'kd_kampung' });
+// mkamdis_qry.hasOne(user_qry, { foreignKey: 'kd_kampung' });
+//user_qry.hasOne(mlvluser_qry, { foreignKey: 'kd_lvl2' });
+user_qry.belongsTo(mlvluser_qry, { foreignKey: 'kd_lvl2' });
+//user_qry.hasOne(mlvluser_qry, { foreignKey: 'kd_lvl2' });
+//user_qry.hasOne(mkamdis_qry, { foreignKey: 'kd_lvl2' });
+// user_qry.belongsTo(mkamdis_qry, { foreignKey: 'kd_lvl2' });
+// user_qry.belongsToMany(mkamdis_qry, { through: 'm_user_' });
+// mkamdis_qry.belongsToMany(user_qry, { through: 'm_user_' });
 export default user_qry;
