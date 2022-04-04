@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 export const getAllUser = async (req, res) => {
     try {
         const datauser = await v_user_qry.findAll({
-            attributes: ['id', 'nama', 'username', 'password', 'nohp', 'email', 'lvl_user', 'lvl_instansi', 'kampung', 'distrik'],
+            attributes: ['id', 'nama', 'username', 'password', 'nohp', 'email', 'lvl_user', 'lvl_instansi', 'kampung', 'distrik', 'kd_lvl1', 'kd_lvl2', 'kd_kampung', 'kd_distrik'],
             order: [['distrik', 'ASC'], ['kampung', 'ASC'], ['nama', 'ASC']]
             // ,            include: [{ model: mkamdis_qry, attributes: ['kampung', 'distrik'] }, { model: mlvluser_qry, attributes: ['level'] }]
         });
