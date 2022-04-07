@@ -9,7 +9,7 @@ import mlvluser_qry from "./model.mLevelUser.js";
 const { DataTypes } = Sequelize;
 const dt = DataTypes;
 
-const v_user_qry = db.define('v_m_user', {
+const v_user_qry = db.define('v_t_user', {
     id: {
         allowNull: false,
         autoIncrement: true,

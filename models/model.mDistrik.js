@@ -21,7 +21,7 @@ const mdistrik_qry = db.define('m_distrik', {
 
 }, {
     freezeTableName: true,
-    schema: 'web_dpmk',
+    schema: 'm_dpmk',
     timestamps: false
 })
 

@@ -12,6 +12,17 @@ export const getAllUser = async (req, res) => {
         res.json(datauser);
     } catch (e) { res.json({ info: e.message }) }
 };
+export const getUserId = async (req, res) => {
+    try {
+        const datauser = await v_user_qry.findAll({
+            attributes: ['id', 'nama', 'username', 'password', 'nohp', 'email', 'lvl_user', 'lvl_instansi', 'kampung', 'distrik', 'kd_lvl1', 'kd_lvl2', 'kd_kampung', 'kd_distrik'],
+            order: [['distrik', 'ASC'], ['kampung', 'ASC'], ['nama', 'ASC']],
+            where: { kd_kampung: 4 }
+        });
+        console.log('kd kp', req.body)
+        res.json(datauser);
+    } catch (e) { res.json({ info: e.message }) }
+};
 
 export const getUserById = async (req, res) => {
     try {

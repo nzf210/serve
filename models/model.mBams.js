@@ -35,7 +35,7 @@ const mbams_qry = db.define('m_bamuskam', {
 
 }, {
     freezeTableName: true,
-    schema: 'web_dpmk',
+    schema: 'm_dpmk',
     timestamps: false
 })
 

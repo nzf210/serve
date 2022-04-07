@@ -21,7 +21,7 @@ const mlvluser_qry = db.define('m_lvl_user', {
 
 }, {
     freezeTableName: true,
-    schema: 'web_dpmk',
+    schema: 'm_dpmk',
     timestamps: false
 })
 

@@ -4,24 +4,35 @@ import db from "../config/database.js";
 const { DataTypes } = Sequelize;
 const dt = DataTypes;
 
-const mkampung_qry = db.define('m_kampung', {
+const tddscair_qry = db.define('v_dds_cair', {
     id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: dt.INTEGER
     },
-    kampung: {
+    level: {
         type: dt.STRING
     },
-    kd_kampung: {
+    kd_lvl2: {
         type: dt.INTEGER,
         allowNull: false
+    },
+    createdAt: {
+        allowNull: false,
+        type: dt.DATE,
+        defaultValue: Date.now()
+    },
+    updatedAt: {
+        allowNull: false,
+        type: dt.DATE,
+        defaultValue: Date.now()
     }
+
 }, {
     freezeTableName: true,
-    schema: 'm_dpmk',
+    schema: 'web_dpmk',
     timestamps: false
 })
 
-export default mkampung_qry;
+export default mlvluser_qry;

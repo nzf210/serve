@@ -27,7 +27,7 @@ const mkamdis_qry = db.define('m_kam_dis', {
     }
 }, {
     freezeTableName: true,
-    schema: 'web_dpmk',
+    schema: 'm_dpmk',
     timestamps: false
 })
 
