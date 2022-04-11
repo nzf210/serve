@@ -26,12 +26,37 @@ PATCH  http://127.0.0.1:3002/ppengesahan
 Content-Type: application/json
 
 {
-    "id": "1",
-    "nama": "Kampung Head",
-    "no_sk": "0003_sk/yhk_2024",
-    "tgl_sk": "2022-04-14",
-    "sts": true
+
+    "id": "4",
+    "kd_kampung": 1,
+    "kd_jbtn": 1,
+    "nama": "Kepala Kam",
+    "no_sk": "0035_sk/yhk_2124",
+    "tgl_sk": "2022-04-16",
+    "sts": 1
   }
+
+###
+DELETE http://127.0.0.1:3002/ppengesahan
+Content-Type: application/json
+
+  {
+    "id": "1"
+  }
+
+###
+POST http://127.0.0.1:3002/ppengesahan
+Content-Type:  application/json
+
+ {
+    "kd_kampung": 1,
+    "no_sk": "298 TAHUN 2021, Tanggal 15 Oktober 2022",
+    "tgl_sk": "2022-10-15",
+    "nama": "PUMEKEN HESELO 3",
+    "kd_jbtn": 1,
+    "sts": 1
+  }
+
 ###
 PATCH  http://127.0.0.1:3002/user/3
 Content-Type: application/json

@@ -63,7 +63,7 @@ export const t_pjbPengesahan_qry = db.define('t_p_pengesahan', {
     kd_kampung: {
         type: dt.INTEGER
     },
-    id_jabatan: {
+    kd_jbtn: {
         type: dt.INTEGER
     },
     nama: {
