@@ -24,6 +24,10 @@ const mkamdis_qry = db.define('m_kam_dis', {
     kd_distrik: {
         type: dt.INTEGER,
         allowNull: false
+    },
+    j_kk: {
+        type: dt.INTEGER,
+        allowNull: false
     }
 }, {
     freezeTableName: true,

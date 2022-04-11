@@ -4,7 +4,7 @@ import db from "./config/database.js";
 import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import user, { rkamdis, rbams } from "./routes/index.js";
+import user, { rkamdis, rbams, pjbtPengesahan } from "./routes/index.js";
 
 dotenv.config();
 const app = express();
@@ -63,6 +63,7 @@ app.use(cookieParser());
 app.use('/user', cors(corsOptions), user);
 app.use('/mkamdis', cors(corsOptions), rkamdis);
 app.use('/mbams', cors(corsOptions), rbams);
+app.use('/ppengesahan', cors(corsOptions), pjbtPengesahan);
 app.get('/', (req, res) => { res.send('API DPMK'); });
 
 app.listen(3002, () => console.log('Serve http://202.157.176.42:3002'));
