@@ -31,6 +31,9 @@ const mbams_qry = db.define('m_bamuskam', {
     },
     id_j: {
         type: dt.STRING
+    },
+    id_kam: {
+        type: dt.INTEGER
     }
 
 }, {

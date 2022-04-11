@@ -41,7 +41,9 @@ DELETE http://127.0.0.1:3002/ppengesahan
 Content-Type: application/json
 
   {
-    "id": "1"
+     "id": 14,
+     "kd_jbtn": 1,
+     "kd_kampung":1
   }
 
 ###

@@ -1,4 +1,5 @@
 import { mbams_qry } from "../models/index.js";
+import { t_pjbPengesahan_qry } from "../models/index.js";
 
 export const getAllBams = async (req, res) => {
     try {
@@ -30,6 +31,16 @@ export const createBams = async (req, res) => {
 
 export const updateBams = async (req, res) => {
     try {
+        if (req.body.id_j === 3 || req.body.id_j === '3' || req.body.id_j === 1 || req.body.id_j === '1') {
+            await t_pjbPengesahan_qry.update({
+                sts: 0
+            },
+                {
+                    where: { kd_kampung: req.body.kd_kampung }
+                })
+            await t_pjbPengesahan_qry.create(req.body);
+        }
+
         await mbams_qry.update({ nama: req.body.nama, no_sk: req.body.no_sk, tgl_sk: req.body.tgl_sk }, {
             where: { id: req.body.id }
         });

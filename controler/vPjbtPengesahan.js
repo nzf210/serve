@@ -18,13 +18,13 @@ export const getPjbtPengesahanById = async (req, res) => {
 
 export const updatePjbtPengesahan = async (req, res) => {
     try {
-
         await t_pjbPengesahan_qry.update({
             sts: 0
         },
             {
                 where: { kd_kampung: req.body.kd_kampung }
             })
+
         await mbams_qry.update({
             nama: req.body.nama,
             no_sk: req.body.no_sk,
@@ -52,6 +52,16 @@ export const updatePjbtPengesahan = async (req, res) => {
 
 export const deletePjbtPengesahan = async (req, res) => {
     try {
+        console.log('req del', req.body)
+        await mbams_qry.update({
+            nama: '',
+            no_sk: '',
+            tgl_sk: '1900-01-01'
+        },
+            {
+                where: { id_kam: req.body.kd_kampung, id_j: req.body.kd_jbtn }
+            })
+
         const datauser = await t_pjbPengesahan_qry.destroy({
             where: {
                 id: req.body.id
