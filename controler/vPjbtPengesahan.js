@@ -22,7 +22,7 @@ export const updatePjbtPengesahan = async (req, res) => {
             sts: 0
         },
             {
-                where: { kd_kampung: req.body.kd_kampung }
+                where: { kd_kampung: req.body.kd_kampung, kd_jbtn: req.body.kd_jbtn }
             })
 
         await mbams_qry.update({
@@ -81,7 +81,7 @@ export const createPjbtPengesahan = async (req, res) => {
             sts: 0
         },
             {
-                where: { kd_kampung: req.body.kd_kampung }
+                where: { kd_kampung: req.body.kd_kampung, kd_jbtn: req.body.kd_jbtn }
             })
 
         await mbams_qry.update({

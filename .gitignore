@@ -13,6 +13,9 @@
 /build
 /data
 
+request_.rest
+request_ag.rest
+
 # misc
 .DS_Store
 .env
@@ -24,3 +27,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
