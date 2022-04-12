@@ -20,7 +20,10 @@ try {
 }
 
 const whitelist = ['http://127.0.0.1:3000', 'http://localhost:3000', 'http://localhost:3001', 'http://127.0.0.1:3001', 'http://202.157.176.42:3000', 'http://202.157.176.42:3001', 'http://202.157.176.42:3000',
-    'http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'http://192.168.1.9:3000', 'http://202.157.176.42:3002', 'http://appin.id', 'https://appin.id', 'http://202.157.176.42']
+    'http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'http://192.168.1.9:3000', 'http://202.157.176.42:3002', 'http://appin.id', 'https://appin.id', 'http://202.157.176.42',
+    'https://dpmkapp-nzf210.vercel.app/', 'https://dpmkapp-nzf210.vercel.app', 'https://dpmkapp.vercel.app/', 'https://dpmkapp.vercel.app', 'https://dpmkapp-8w4ka9yx1-nzf210.vercel.app/', 'https://dpmkapp-8w4ka9yx1-nzf210.vercel.app'
+
+]
 
 
 // app.use(cors({ credentials: true, origin: "http://127.0.0.1:3000/" }));
