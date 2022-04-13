@@ -121,11 +121,13 @@ export const Login = async (req, res) => {
         const kd_kampung = user[0].kd_kampung;
         const kd_distrik = user[0].kd_distrik;
 
+        // const accestoken = jwt.sign({ id, nama, username, email, nohp, kd_lvl1, kd_lvl2, kd_distrik, kd_kampung }, process.env.ACCES_TOKEN, { expiresIn: '1d' });
         const accestoken = jwt.sign({ id, nama, username, email, nohp, kd_lvl1, kd_lvl2, kd_distrik, kd_kampung }, process.env.ACCES_TOKEN, { expiresIn: '25s' });
         const refreshtoken = jwt.sign({ id, nama, username, email, nohp, kd_lvl1, kd_lvl2, kd_distrik, kd_kampung }, process.env.REFRESH_TOKEN, { expiresIn: '1d' });
 
         await user_qry.update({ refresh_token: refreshtoken }, { where: { id: id } });
-        res.cookie('refreshtoken', refreshtoken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000, secure: true });
+
+        res.cookie('refreshtoken', refreshtoken, { maxAge: 24 * 60 * 60 * 100, secure: true, httpOnly: true });
         res.json({ accestoken });
 
     } catch (e) {

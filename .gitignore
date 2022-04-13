@@ -17,6 +17,7 @@ request_.rest
 request_ag.rest
 
 # misc
+appin.id
 .DS_Store
 .env
 .env.local

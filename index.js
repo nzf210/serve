@@ -10,6 +10,7 @@ dotenv.config();
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+//app.set("trust proxy", 1);
 
 try {
     await db.authenticate();
@@ -24,25 +25,6 @@ const whitelist = ['http://127.0.0.1:3000', 'http://localhost:3000', 'http://loc
     'https://dpmkapp-nzf210.vercel.app/', 'https://dpmkapp-nzf210.vercel.app', 'https://dpmkapp.vercel.app/', 'https://dpmkapp.vercel.app', 'https://dpmkapp-8w4ka9yx1-nzf210.vercel.app/', 'https://dpmkapp-8w4ka9yx1-nzf210.vercel.app'
 
 ]
-
-
-// app.use(cors({ credentials: true, origin: "http://127.0.0.1:3000/" }));
-
-//===========================================
-// app.use((req, res, next) => {
-//     res.setHeader('Access-Control-Allow-Credentials', true);
-//     res.setHeader("Access-Control-Allow-Origin", "*");
-//     res.setHeader(
-//         "Access-Control-Allow-Headers",
-//         "Origin, X-Requested-with, Content-Type, Accept, Authorization"
-//     );
-//     if (req.method === 'OPTION') {
-//         res.setHeader('Access-Control-Allow-Methods', 'PUT , POST , PATCH , GET , DELETE');
-//         return res.status(200).json({});
-//     }
-//     next();
-// })
-//===========================================
 
 const corsOptions = {
     origin: function (origin, callback) {
@@ -60,6 +42,8 @@ app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Credentials', true);
     next();
 });
+
+
 
 app.use(express.json());
 app.use(cookieParser());

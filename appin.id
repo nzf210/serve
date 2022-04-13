@@ -21,6 +21,11 @@
 server {
 	listen 80;
 	listen [::]:80;
+	listen 443 ssl;
+
+	ssl on;
+	ssl_certificate /etc/nginx/ssl/bundel.crt;
+	ssl_certificate_key /etc/nginx/ssl/key.crt;
 
 	# SSL configuration
 	#
@@ -51,6 +56,10 @@ server {
 		try_files $uri /index.html;
 	}
 
+	location /api {
+		proxy_pass http://127.0.0.1:3002;
+	}
+
 	# pass PHP scripts to FastCGI server
 	#
 	#location ~ \.php$ {
@@ -68,7 +77,7 @@ server {
 	#location ~ /\.ht {
 	#	deny all;
 	#}
-}
+
 
 
 # Virtual Host configuration for example.com
@@ -76,10 +85,8 @@ server {
 # You can move that to a different file under sites-available/ and symlink that
 # to sites-enabled/ to enable it.
 #
-#server {
-#	listen 80;
-#	listen [::]:80;
-#
+
+#	listenssl_certificate_key /etc/nginx/ssl/ssl.pem;
 #	server_name example.com;
 #
 #	root /var/www/example.com;
@@ -88,4 +95,4 @@ server {
 #	location / {
 #		try_files $uri $uri/ =404;
 #	}
-#}
+}
