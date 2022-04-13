@@ -10,7 +10,10 @@ dotenv.config();
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-//app.set("trust proxy", 1);
+
+app.set('trust proxy', 1) // trust first proxy
+
+
 
 try {
     await db.authenticate();
