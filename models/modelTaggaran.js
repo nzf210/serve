@@ -107,6 +107,15 @@ const v_anggaran_qry = db.define('v_t_anggaran', {
     },
     j_kk: {
         type: dt.INTEGER
+    },
+    nama: {
+        type: dt.STRING
+    },
+    no_sk: {
+        type: dt.STRING
+    },
+    tgl_sk: {
+        type: dt.DATE
     }
 
 }, {

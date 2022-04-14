@@ -128,7 +128,8 @@ export const Login = async (req, res) => {
         const refreshtoken = jwt.sign({ id, nama, username, email, nohp, kd_lvl1, kd_lvl2, kd_distrik, kd_kampung }, process.env.REFRESH_TOKEN, { expiresIn: '1d' });
 
         await user_qry.update({ refresh_token: refreshtoken }, { where: { id: id } });
-        res.cookie('refreshtoken', refreshtoken, { maxAge: 24 * 60 * 60 * 100, secure: true, httpOnly: true, domain: 'appin.id', sameSite: 'none' });
+        res.cookie('refreshtoken', refreshtoken, { maxAge: 24 * 60 * 60 * 100, httpOnly: true });
+        // res.cookie('refreshtoken', refreshtoken, { maxAge: 24 * 60 * 60 * 100, httpOnly: true , secure: true, domain: 'appin.id', sameSite: 'none'  });
         res.json({ accestoken });
 
     } catch (e) {

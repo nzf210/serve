@@ -4,15 +4,16 @@ import db from "./config/database.js";
 import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import user, { rkamdis, rbams, pjbtPengesahan, anggaran } from "./routes/index.js";
+import user, { rkamdis, rbams, pjbtPengesahan, anggaran, nodok } from "./routes/index.js";
 
 dotenv.config();
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.set('trust proxy', 1) // trust first proxy
-
+if (process.env === 'production') {
+    app.set('trust proxy', 1) // trust first proxy
+}
 
 
 try {
@@ -55,6 +56,7 @@ app.use('/mkamdis', cors(corsOptions), rkamdis);
 app.use('/mbams', cors(corsOptions), rbams);
 app.use('/ppengesahan', cors(corsOptions), pjbtPengesahan);
 app.use('/anggaran', cors(corsOptions), anggaran);
+app.use('/nodok', cors(corsOptions), nodok);
 app.get('/', (req, res) => { res.send('API DPMK'); });
 
-app.listen(3002, () => console.log('Serve http://202.157.176.42:3002'));
+app.listen(3002, () => console.log('Serve http://localhost:3002'));

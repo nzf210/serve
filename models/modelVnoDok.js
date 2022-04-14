@@ -1,0 +1,30 @@
+import { Sequelize } from "sequelize";
+import db from "../config/database.js";
+
+
+const { DataTypes } = Sequelize;
+const dt = DataTypes;
+
+const v_no_qry = db.define('v_no_dok', {
+
+    no_spd: {
+        type: dt.INTEGER
+    },
+    no_spp: {
+        type: dt.INTEGER
+    },
+    no_spm: {
+        type: dt.INTEGER
+    },
+    no_sp2d: {
+        type: dt.INTEGER
+    }
+
+}, {
+    freezeTableName: true,
+    schema: 'web_dpmk',
+    timestamps: false
+})
+v_no_qry.removeAttribute('id');
+
+export default v_no_qry;
