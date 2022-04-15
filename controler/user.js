@@ -19,7 +19,7 @@ export const getUserId = async (req, res) => {
         const datauser = await v_user_qry.findAll({
             attributes: ['id', 'nama', 'username', 'password', 'nohp', 'email', 'lvl_user', 'lvl_instansi', 'kampung', 'distrik', 'kd_lvl1', 'kd_lvl2', 'kd_kampung', 'kd_distrik'],
             order: [['distrik', 'ASC'], ['kampung', 'ASC'], ['nama', 'ASC']],
-            where: { kd_kampung: 4 }
+            where: { kd_kampung: req.body.kd_kampung }
         });
         console.log('kd kp', req.body)
         res.json(datauser);

@@ -28,3 +28,28 @@ const v_no_qry = db.define('v_no_dok', {
 v_no_qry.removeAttribute('id');
 
 export default v_no_qry;
+
+export const v_no_kamp_qry = db.define('v_no_dok_kampung', {
+
+    no_spd: {
+        type: dt.INTEGER
+    },
+    no_spp: {
+        type: dt.INTEGER
+    },
+    no_spm: {
+        type: dt.INTEGER
+    },
+    no_sp2d: {
+        type: dt.INTEGER
+    },
+    kd_kampung: {
+        type: dt.INTEGER
+    }
+
+}, {
+    freezeTableName: true,
+    schema: 'web_dpmk',
+    timestamps: false
+})
+v_no_kamp_qry.removeAttribute('id');
