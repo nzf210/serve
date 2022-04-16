@@ -21,7 +21,7 @@ export const updateAnggaran = async (req, res) => {
 
         await t_anggaran_qry.update(
             {
-                id: req.body.id,
+                // id: req.body.id,
                 kd_keg: req.body.kd_keg,
                 pagu: req.body.pagu,
                 kd_kampung: req.body.kd_kampung,

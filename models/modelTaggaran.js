@@ -199,7 +199,13 @@ export const t_anggaran_qry = db.define('t_keg', {
     sts_sp2d: {
         type: dt.BOOLEAN,
         defaultValue: false,
-    }
+    },
+    no_sp2d: {
+        type: dt.STRING
+    },
+    tgl_sp2d: {
+        type: dt.DATE
+    },
 
 }, {
     freezeTableName: true,
