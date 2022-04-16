@@ -76,9 +76,7 @@ const v_anggaran_qry = db.define('v_t_anggaran', {
 
     tahap: {
         type: dt.STRING
-    },
-
-    thp_cair: {
+    }, thp_cair: {
         type: dt.STRING
     },
     no_sp2d: {
@@ -116,7 +114,25 @@ const v_anggaran_qry = db.define('v_t_anggaran', {
     },
     tgl_sk: {
         type: dt.DATE
-    }
+    },
+    nama_kepala: {
+        type: dt.STRING
+    },
+    tgl_sk_kepala: {
+        type: dt.DATE
+    },
+    no_sk_kepala: {
+        type: dt.STRING
+    },
+    rek: {
+        type: dt.STRING
+    },
+    no_rek: {
+        type: dt.STRING
+    },
+    bank: {
+        type: dt.STRING
+    },
 
 }, {
     freezeTableName: true,
@@ -183,13 +199,8 @@ export const t_anggaran_qry = db.define('t_keg', {
     sts_sp2d: {
         type: dt.BOOLEAN,
         defaultValue: false,
-    },
-    no_sp2d: {
-        type: dt.STRING
-    },
-    tgl_sp2d: {
-        type: dt.DATE
     }
+
 }, {
     freezeTableName: true,
     schema: 'web_dpmk',
