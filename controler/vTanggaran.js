@@ -1,9 +1,15 @@
-import { v_anggaran_qry, t_anggaran_qry } from "../models/index.js";
+import { v_anggaran_qry, t_anggaran_qry, v_anggaranB_qry } from "../models/index.js";
 
 
 export const getAllAggaran = async (req, res) => {
     try {
         const datauser = await v_anggaran_qry.findAll();
+        res.json(datauser);
+    } catch (e) { res.json({ info: e.message }) }
+};
+export const getAllAggaranB = async (req, res) => {
+    try {
+        const datauser = await v_anggaranB_qry.findAll();
         res.json(datauser);
     } catch (e) { res.json({ info: e.message }) }
 };
