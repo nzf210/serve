@@ -19,7 +19,7 @@ const v_anggaran_qry = db.define('v_t_anggaran', {
         type: dt.INTEGER
     },
     kd_kampung: {
-        type: dt.STRING
+        type: dt.INTEGER
     },
     sts: {
         type: dt.BOOLEAN
@@ -88,6 +88,9 @@ const v_anggaran_qry = db.define('v_t_anggaran', {
     thp_advis: {
         type: dt.STRING
     },
+    thp_select: {
+        type: dt.STRING
+    },
     opt1: {
         type: dt.STRING
     },
@@ -95,6 +98,9 @@ const v_anggaran_qry = db.define('v_t_anggaran', {
         type: dt.STRING
     },
     opt3: {
+        type: dt.STRING
+    },
+    opt4: {
         type: dt.STRING
     },
     kampung: {
@@ -284,7 +290,11 @@ export const v_anggaranB_qry = db.define('v_t_anggaran_bams', {
 
     tahap: {
         type: dt.STRING
-    }, thp_cair: {
+    },
+    thp_cair: {
+        type: dt.STRING
+    },
+    thp_select: {
         type: dt.STRING
     },
     no_sp2d: {
@@ -303,6 +313,9 @@ export const v_anggaranB_qry = db.define('v_t_anggaran_bams', {
         type: dt.STRING
     },
     opt3: {
+        type: dt.STRING
+    },
+    opt4: {
         type: dt.STRING
     },
     kampung: {

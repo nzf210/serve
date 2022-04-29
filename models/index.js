@@ -9,4 +9,7 @@ import v_pjbPengesahan_qry, { t_pjbPengesahan_qry } from './modelTpejabatPengesa
 import v_anggaran_qry, { t_anggaran_qry, v_anggaranB_qry } from './modelTaggaran.js';
 import v_no_qry, { v_no_kamp_qry } from './modelVnoDok.js';
 
-export { user_qry, mkampung_qry, mdistrik_qry, mkamdis_qry, mlvluser_qry, v_user_qry, mbams_qry, v_pjbPengesahan_qry, t_pjbPengesahan_qry, v_anggaran_qry, t_anggaran_qry, v_no_qry, v_no_kamp_qry, v_anggaranB_qry };
+export {
+    user_qry, mkampung_qry, mdistrik_qry, mkamdis_qry, mlvluser_qry, v_user_qry, mbams_qry, v_pjbPengesahan_qry,
+    t_pjbPengesahan_qry, v_anggaran_qry, t_anggaran_qry, v_no_qry, v_no_kamp_qry, v_anggaranB_qry
+};
