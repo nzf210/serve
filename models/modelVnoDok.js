@@ -45,6 +45,9 @@ export const v_no_kamp_qry = db.define('v_no_dok_kampung', {
     },
     kd_kampung: {
         type: dt.INTEGER
+    },
+    kd_keg: {
+        type: dt.INTEGER
     }
 
 }, {

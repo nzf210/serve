@@ -1,39 +1,84 @@
 import { Op } from "sequelize";
 import pagination from './paginate.js';
 import { v_anggaran_qry, t_anggaran_qry, v_anggaranB_qry, v_anggaran_reg_qry, v_anggaran_cov_qry, v_anggaran_blt_qry } from "../models/index.js";
-export const getAllAggaran = async (req, res) => {
 
-    const { distrik, kampung, kd_kampung, page, size, tgl_spp, tgl_spm, tgl_sp2d, kd_advis, id_kampung, sts, sts_spp, sts_spm, sts_sp2d
-    } = req.query;
-    console.log('query', page, 'size', size)
-    const where = {}
+export const getAllAggaran = async (req, res) => {
+    // const { distrik, kampung, kd_kampung, page, size, tgl_spp, tgl_spm, tgl_sp2d, kd_advis, id_kampung, sts, sts_spp, sts_spm, sts_sp2d
+    // } = req.query;
+    // console.log('query', page, 'size', size)
+    // const where = {}
+    // const pag = page ? parseInt(page) : 1;
+    // const per_pag = size ? parseInt(size) : 20;
+
+    // try {
+    //     if (distrik) where.distrik = { [Op.like]: `%${distrik}%` }
+    //     if (kd_kampung) where.kd_kampung = { [Op.eq]: `${kd_kampung}` }
+    //     if (kampung) where.kampung = { [Op.like]: `%${kampung.toUpperCase()}%` }
+    //     if (tgl_spp) where.tgl_spp = { [Op.eq]: `%${tgl_spp}%` }
+    //     if (tgl_spm) where.tgl_spm = { [Op.eq]: `%${tgl_spm}%` }
+    //     if (tgl_sp2d) where.tgl_sp2d = { [Op.eq]: `%${tgl_sp2d}%` }
+    //     if (kd_advis) where.kd_advis = { [Op.like]: `%${kd_advis}%` }
+    //     if (sts) where.sts = { [Op.eq]: `${sts}` }
+    //     if (sts_spp) where.sts_spp = { [Op.eq]: `${sts_spp}` }
+    //     if (sts_spm) where.sts_spm = { [Op.eq]: `${sts_spm}` }
+    //     if (sts_sp2d) where.sts_sp2d = { [Op.eq]: `${sts_sp2d}` }
+
+    //     const data = await v_anggaran_qry.findAndCountAll({
+    //         where,
+    //         offset: (pag - 1) * pag,
+    //         limit: per_pag,
+    //         //distinct: 'true' // untuk menghapus data double
+    //         order: [['distrik', 'ASC'], ['kampung', 'ASC']]
+    //     });
+    //     //console.log('pagi', count, "rows", rows)
+
+    //     const result = pagination({ data: data.rows, count: data.count, page: pag, per_page: per_pag });
+    //     if (data.count <= 0) {
+    //         res.status(404).send({
+    //             info: 'data tidak ditemukan'
+    //         })
+    //     }
+    //     res.status(200).send({
+    //         status: 'berhasil',
+    //         result
+    //     });
+    // } catch (e) { res.json({ info: e.message }) }
+    const { distrik, kampung, kd_kampung, page, size, tgl_spp, tgl_spm, tgl_sp2d, kd_advis, id_kampung, sts, sts_spp, sts_spm, sts_sp2d, kd_keg } = req.query;
+    console.log('query', page, 'size', size, 'kampung', kampung, 'distrik', distrik, 'agReg')
+    let where = {};
     const pag = page ? parseInt(page) : 1;
     const per_pag = size ? parseInt(size) : 20;
 
+    if (kd_kampung) where.kd_kampung = { [Op.eq]: `${kd_kampung}` }
+    if (distrik) where.distrik = { [Op.iLike]: `%${distrik}%` }
+    if (kampung) where = {
+        [Op.or]:
+            [
+                { kampung: { [Op.iLike]: `%${kampung}%` } },
+                { distrik: { [Op.iLike]: `%${kampung}%` } },
+                { thp_advis: { [Op.iLike]: `%${kampung}%` } },
+                { no_spp: { [Op.iLike]: `%${kampung}%` } },
+                { no_spm: { [Op.iLike]: `%${kampung}%` } },
+                { no_sp2d: { [Op.iLike]: `%${kampung}%` } },
+            ]
+    }
+    if (kd_keg) where.kd_keg = { [Op.eq]: `${kd_keg}` }
+    if (sts) where.sts = { [Op.eq]: `${sts}` }
+    if (sts_spp) where.sts_spp = { [Op.eq]: `${sts_spp}` }
+    if (sts_spm) where.sts_spm = { [Op.eq]: `${sts_spm}` }
+    if (sts_sp2d) where.sts_sp2d = { [Op.eq]: `${sts_sp2d}` }
     try {
-        if (distrik) where.distrik = { [Op.like]: `%${distrik}%` }
-        if (kd_kampung) where.kd_kampung = { [Op.eq]: `${kd_kampung}` }
-        if (kampung) where.kampung = { [Op.like]: `%${kampung.toUpperCase()}%` }
-        if (tgl_spp) where.tgl_spp = { [Op.eq]: `%${tgl_spp}%` }
-        if (tgl_spm) where.tgl_spm = { [Op.eq]: `%${tgl_spm}%` }
-        if (tgl_sp2d) where.tgl_sp2d = { [Op.eq]: `%${tgl_sp2d}%` }
-        if (kd_advis) where.kd_advis = { [Op.like]: `%${kd_advis}%` }
-        if (sts) where.sts = { [Op.eq]: `${sts}` }
-        if (sts_spp) where.sts_spp = { [Op.eq]: `${sts_spp}` }
-        if (sts_spm) where.sts_spm = { [Op.eq]: `${sts_spm}` }
-        if (sts_sp2d) where.sts_sp2d = { [Op.eq]: `${sts_sp2d}` }
-
         const data = await v_anggaran_qry.findAndCountAll({
             where,
-            offset: (pag - 1) * pag,
+            offset: (pag - 1) * per_pag,
             limit: per_pag,
-            //distinct: 'true' // untuk menghapus data double
+            //distinct: 'true' // untuk menghapus data double 
             order: [['distrik', 'ASC'], ['kampung', 'ASC']]
         });
         //console.log('pagi', count, "rows", rows)
 
         const result = pagination({ data: data.rows, count: data.count, page: pag, per_page: per_pag });
-        if (data.count <= 0) {
+        if (data.count = 0) {
             res.status(404).send({
                 info: 'data tidak ditemukan'
             })
@@ -59,18 +104,17 @@ export const getAllAggaranReg = async (req, res) => {
             [
                 { kampung: { [Op.iLike]: `%${kampung}%` } },
                 { distrik: { [Op.iLike]: `%${kampung}%` } },
-                { thp_advis: { [Op.iLike]: `%${kampung}%` } }
+                { thp_advis: { [Op.iLike]: `%${kampung}%` } },
+                { no_spp: { [Op.iLike]: `%${kampung}%` } },
+                { no_spm: { [Op.iLike]: `%${kampung}%` } },
+                { no_sp2d: { [Op.iLike]: `%${kampung}%` } },
             ]
     }
     if (sts) where.sts = { [Op.eq]: `${sts}` }
     if (sts_spp) where.sts_spp = { [Op.eq]: `${sts_spp}` }
     if (sts_spm) where.sts_spm = { [Op.eq]: `${sts_spm}` }
     if (sts_sp2d) where.sts_sp2d = { [Op.eq]: `${sts_sp2d}` }
-
-
     try {
-
-
         const data = await v_anggaran_reg_qry.findAndCountAll({
             where,
             offset: (pag - 1) * per_pag,
@@ -93,38 +137,81 @@ export const getAllAggaranReg = async (req, res) => {
     } catch (e) { res.json({ info: e.message }) }
 };
 export const getAllAggaranCov = async (req, res) => {
+    // const { distrik, kampung, kd_kampung, page, size, tgl_spp, tgl_spm, tgl_sp2d, kd_advis, id_kampung, sts, sts_spp, sts_spm, sts_sp2d } = req.query;
+    // console.log('query', page, 'size', size)
+    // const where = {}
+    // const pag = page ? parseInt(page) : 1;
+    // const per_pag = size ? parseInt(size) : 20;
 
-    const { distrik, kampung, kd_kampung, page, size, tgl_spp, tgl_spm, tgl_sp2d, kd_advis, id_kampung, sts, sts_spp, sts_spm, sts_sp2d
-    } = req.query;
-    console.log('query', page, 'size', size)
-    const where = {}
+    // try {
+    //     if (distrik) where.distrik = { [Op.like]: `%${distrik}%` }
+    //     if (kd_kampung) where.kd_kampung = { [Op.eq]: `${kd_kampung}` }
+    //     if (kampung) where.kampung = { [Op.like]: `%${kampung.toUpperCase()}%` }
+    //     if (tgl_spp) where.tgl_spp = { [Op.eq]: `%${tgl_spp}%` }
+    //     if (tgl_spm) where.tgl_spm = { [Op.eq]: `%${tgl_spm}%` }
+    //     if (tgl_sp2d) where.tgl_sp2d = { [Op.eq]: `%${tgl_sp2d}%` }
+    //     if (kd_advis) where.kd_advis = { [Op.like]: `%${kd_advis}%` }
+    //     if (sts) where.sts = { [Op.eq]: `${sts}` }
+    //     if (sts_spp) where.sts_spp = { [Op.eq]: `${sts_spp}` }
+    //     if (sts_spm) where.sts_spm = { [Op.eq]: `${sts_spm}` }
+    //     if (sts_sp2d) where.sts_sp2d = { [Op.eq]: `${sts_sp2d}` }
+
+    //     const data = await v_anggaran_cov_qry.findAndCountAll({
+    //         where,
+    //         offset: (pag - 1) * pag,
+    //         limit: per_pag,
+    //         //distinct: 'true' // untuk menghapus data double
+    //         order: [['distrik', 'ASC'], ['kampung', 'ASC']]
+    //     });
+    //     //console.log('pagi', count, "rows", rows)
+
+    //     const result = pagination({ data: data.rows, count: data.count, page: pag, per_page: per_pag });
+    //     if (data.count <= 0) {
+    //         res.status(404).send({
+    //             info: 'data tidak ditemukan'
+    //         })
+    //     }
+    //     res.status(200).send({
+    //         status: 'berhasil',
+    //         result
+    //     });
+    // } catch (e) { res.json({ info: e.message }) }
+    //===================================================================================================
+    const { distrik, kampung, kd_kampung, page, size, tgl_spp, tgl_spm, tgl_sp2d, kd_advis, id_kampung, sts, sts_spp, sts_spm, sts_sp2d } = req.query;
+    console.log('query', page, 'size', size, 'kampung', kampung, 'distrik', distrik, 'agReg')
+    let where = {};
     const pag = page ? parseInt(page) : 1;
     const per_pag = size ? parseInt(size) : 20;
 
+    if (kd_kampung) where.kd_kampung = { [Op.eq]: `${kd_kampung}` }
+    if (distrik) where.distrik = { [Op.iLike]: `%${distrik}%` }
+    if (kampung) where = {
+        [Op.or]:
+            [
+                { kampung: { [Op.iLike]: `%${kampung}%` } },
+                { distrik: { [Op.iLike]: `%${kampung}%` } },
+                { thp_advis: { [Op.iLike]: `%${kampung}%` } },
+                { no_spp: { [Op.iLike]: `%${kampung}%` } },
+                { no_spm: { [Op.iLike]: `%${kampung}%` } },
+                { no_sp2d: { [Op.iLike]: `%${kampung}%` } },
+            ]
+    }
+    if (sts) where.sts = { [Op.eq]: `${sts}` }
+    if (sts_spp) where.sts_spp = { [Op.eq]: `${sts_spp}` }
+    if (sts_spm) where.sts_spm = { [Op.eq]: `${sts_spm}` }
+    if (sts_sp2d) where.sts_sp2d = { [Op.eq]: `${sts_sp2d}` }
     try {
-        if (distrik) where.distrik = { [Op.like]: `%${distrik}%` }
-        if (kd_kampung) where.kd_kampung = { [Op.eq]: `${kd_kampung}` }
-        if (kampung) where.kampung = { [Op.like]: `%${kampung.toUpperCase()}%` }
-        if (tgl_spp) where.tgl_spp = { [Op.eq]: `%${tgl_spp}%` }
-        if (tgl_spm) where.tgl_spm = { [Op.eq]: `%${tgl_spm}%` }
-        if (tgl_sp2d) where.tgl_sp2d = { [Op.eq]: `%${tgl_sp2d}%` }
-        if (kd_advis) where.kd_advis = { [Op.like]: `%${kd_advis}%` }
-        if (sts) where.sts = { [Op.eq]: `${sts}` }
-        if (sts_spp) where.sts_spp = { [Op.eq]: `${sts_spp}` }
-        if (sts_spm) where.sts_spm = { [Op.eq]: `${sts_spm}` }
-        if (sts_sp2d) where.sts_sp2d = { [Op.eq]: `${sts_sp2d}` }
-
         const data = await v_anggaran_cov_qry.findAndCountAll({
             where,
-            offset: (pag - 1) * pag,
+            offset: (pag - 1) * per_pag,
             limit: per_pag,
-            //distinct: 'true' // untuk menghapus data double
+            //distinct: 'true' // untuk menghapus data double 
             order: [['distrik', 'ASC'], ['kampung', 'ASC']]
         });
         //console.log('pagi', count, "rows", rows)
 
         const result = pagination({ data: data.rows, count: data.count, page: pag, per_page: per_pag });
-        if (data.count <= 0) {
+        if (data.count = 0) {
             res.status(404).send({
                 info: 'data tidak ditemukan'
             })
@@ -137,37 +224,82 @@ export const getAllAggaranCov = async (req, res) => {
 };
 export const getAllAggaranBlt = async (req, res) => {
 
-    const { distrik, kampung, kd_kampung, page, size, tgl_spp, tgl_spm, tgl_sp2d, kd_advis, id_kampung, sts, sts_spp, sts_spm, sts_sp2d
-    } = req.query;
-    console.log('query', page, 'size', size)
-    const where = {}
+    // const { distrik, kampung, kd_kampung, page, size, tgl_spp, tgl_spm, tgl_sp2d, kd_advis, id_kampung, sts, sts_spp, sts_spm, sts_sp2d
+    // } = req.query;
+    // console.log('query', page, 'size', size)
+    // const where = {}
+    // const pag = page ? parseInt(page) : 1;
+    // const per_pag = size ? parseInt(size) : 20;
+
+    // try {
+    //     if (distrik) where.distrik = { [Op.like]: `%${distrik}%` }
+    //     if (kd_kampung) where.kd_kampung = { [Op.eq]: `${kd_kampung}` }
+    //     if (kampung) where.kampung = { [Op.like]: `%${kampung.toUpperCase()}%` }
+    //     if (tgl_spp) where.tgl_spp = { [Op.eq]: `%${tgl_spp}%` }
+    //     if (tgl_spm) where.tgl_spm = { [Op.eq]: `%${tgl_spm}%` }
+    //     if (tgl_sp2d) where.tgl_sp2d = { [Op.eq]: `%${tgl_sp2d}%` }
+    //     if (kd_advis) where.kd_advis = { [Op.like]: `%${kd_advis}%` }
+    //     if (sts) where.sts = { [Op.eq]: `${sts}` }
+    //     if (sts_spp) where.sts_spp = { [Op.eq]: `${sts_spp}` }
+    //     if (sts_spm) where.sts_spm = { [Op.eq]: `${sts_spm}` }
+    //     if (sts_sp2d) where.sts_sp2d = { [Op.eq]: `${sts_sp2d}` }
+
+    //     const data = await v_anggaran_blt_qry.findAndCountAll({
+    //         where,
+    //         offset: (pag - 1) * pag,
+    //         limit: per_pag,
+    //         //distinct: 'true' // untuk menghapus data double
+    //         order: [['distrik', 'ASC'], ['kampung', 'ASC']]
+    //     });
+    //     //console.log('pagi', count, "rows", rows)
+
+    //     const result = pagination({ data: data.rows, count: data.count, page: pag, per_page: per_pag });
+    //     if (data.count <= 0) {
+    //         res.status(404).send({
+    //             info: 'data tidak ditemukan'
+    //         })
+    //     }
+    //     res.status(200).send({
+    //         status: 'berhasil',
+    //         result
+    //     });
+    // } catch (e) { res.json({ info: e.message }) }
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    const { distrik, kampung, kd_kampung, page, size, tgl_spp, tgl_spm, tgl_sp2d, kd_advis, id_kampung, sts, sts_spp, sts_spm, sts_sp2d } = req.query;
+    console.log('query', page, 'size', size, 'kampung', kampung, 'distrik', distrik, 'agReg')
+    let where = {};
     const pag = page ? parseInt(page) : 1;
     const per_pag = size ? parseInt(size) : 20;
 
+    if (kd_kampung) where.kd_kampung = { [Op.eq]: `${kd_kampung}` }
+    if (distrik) where.distrik = { [Op.iLike]: `%${distrik}%` }
+    if (kampung) where = {
+        [Op.or]:
+            [
+                { kampung: { [Op.iLike]: `%${kampung}%` } },
+                { distrik: { [Op.iLike]: `%${kampung}%` } },
+                { thp_advis: { [Op.iLike]: `%${kampung}%` } },
+                { no_spp: { [Op.iLike]: `%${kampung}%` } },
+                { no_spm: { [Op.iLike]: `%${kampung}%` } },
+                { no_sp2d: { [Op.iLike]: `%${kampung}%` } },
+            ]
+    }
+    if (sts) where.sts = { [Op.eq]: `${sts}` }
+    if (sts_spp) where.sts_spp = { [Op.eq]: `${sts_spp}` }
+    if (sts_spm) where.sts_spm = { [Op.eq]: `${sts_spm}` }
+    if (sts_sp2d) where.sts_sp2d = { [Op.eq]: `${sts_sp2d}` }
     try {
-        if (distrik) where.distrik = { [Op.like]: `%${distrik}%` }
-        if (kd_kampung) where.kd_kampung = { [Op.eq]: `${kd_kampung}` }
-        if (kampung) where.kampung = { [Op.like]: `%${kampung.toUpperCase()}%` }
-        if (tgl_spp) where.tgl_spp = { [Op.eq]: `%${tgl_spp}%` }
-        if (tgl_spm) where.tgl_spm = { [Op.eq]: `%${tgl_spm}%` }
-        if (tgl_sp2d) where.tgl_sp2d = { [Op.eq]: `%${tgl_sp2d}%` }
-        if (kd_advis) where.kd_advis = { [Op.like]: `%${kd_advis}%` }
-        if (sts) where.sts = { [Op.eq]: `${sts}` }
-        if (sts_spp) where.sts_spp = { [Op.eq]: `${sts_spp}` }
-        if (sts_spm) where.sts_spm = { [Op.eq]: `${sts_spm}` }
-        if (sts_sp2d) where.sts_sp2d = { [Op.eq]: `${sts_sp2d}` }
-
         const data = await v_anggaran_blt_qry.findAndCountAll({
             where,
-            offset: (pag - 1) * pag,
+            offset: (pag - 1) * per_pag,
             limit: per_pag,
-            //distinct: 'true' // untuk menghapus data double
+            //distinct: 'true' // untuk menghapus data double 
             order: [['distrik', 'ASC'], ['kampung', 'ASC']]
         });
         //console.log('pagi', count, "rows", rows)
 
         const result = pagination({ data: data.rows, count: data.count, page: pag, per_page: per_pag });
-        if (data.count <= 0) {
+        if (data.count = 0) {
             res.status(404).send({
                 info: 'data tidak ditemukan'
             })
@@ -180,31 +312,77 @@ export const getAllAggaranBlt = async (req, res) => {
 };
 
 export const getAllAggaranB = async (req, res) => {
-    const { distrik, kampung, kd_kampung, page, size,
-        tgl_spp, tgl_spm, tgl_sp2d, kd_advis,
-    } = req.query;
-    const where = {}
+    // const { distrik, kampung, kd_kampung, page, size,
+    //     tgl_spp, tgl_spm, tgl_sp2d, kd_advis,
+    // } = req.query;
+    // const where = {}
+    // const pag = page ? parseInt(page) : 1;
+    // const per_pag = size ? parseInt(size) : 5;
+
+    // try {
+    //     if (distrik) where.distrik = { [Op.like]: `${distrik}` }
+    //     if (kd_kampung) where.kd_kampung = { [Op.eq]: `${kd_kampung}` }
+    //     if (kampung) where.kampung = { [Op.like]: `%${kampung.toUpperCase()}%` }
+    //     if (tgl_spp) where.tgl_spp = { [Op.eq]: `${tgl_spp}` }
+    //     if (tgl_spm) where.tgl_spm = { [Op.eq]: `${tgl_spm}` }
+    //     if (tgl_sp2d) where.tgl_sp2d = { [Op.eq]: `${tgl_sp2d}` }
+    //     if (kd_advis) where.kd_advis = { [Op.like]: `${kd_advis}` }
+
+    //     const data = await v_anggaranB_qry.findAndCountAll({
+    //         where,
+    //         offset: (pag - 1) * pag,
+    //         limit: per_pag,
+    //         order: [['distrik', 'ASC'], ['kampung', 'ASC']]
+    //     });
+
+    //     const result = pagination({ data: data.rows, count: data.count, page: pag, per_page: per_pag });
+    //     if (data.count <= 0) {
+    //         res.status(404).send({
+    //             info: 'data tidak ditemukan'
+    //         })
+    //     }
+    //     res.status(200).send({
+    //         status: 'berhasil',
+    //         result
+    //     });
+
+    // } catch (e) { res.json({ info: e.message }) }
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    const { distrik, kampung, kd_kampung, page, size, tgl_spp, tgl_spm, tgl_sp2d, kd_advis, id_kampung, sts, sts_spp, sts_spm, sts_sp2d } = req.query;
+    console.log('query', page, 'size', size, 'kampung', kampung, 'distrik', distrik, 'agReg')
+    let where = {};
     const pag = page ? parseInt(page) : 1;
-    const per_pag = size ? parseInt(size) : 5;
+    const per_pag = size ? parseInt(size) : 20;
 
+    if (kd_kampung) where.kd_kampung = { [Op.eq]: `${kd_kampung}` }
+    if (distrik) where.distrik = { [Op.iLike]: `%${distrik}%` }
+    if (kampung) where = {
+        [Op.or]:
+            [
+                { kampung: { [Op.iLike]: `%${kampung}%` } },
+                { distrik: { [Op.iLike]: `%${kampung}%` } },
+                { thp_advis: { [Op.iLike]: `%${kampung}%` } },
+                { no_spp: { [Op.iLike]: `%${kampung}%` } },
+                { no_spm: { [Op.iLike]: `%${kampung}%` } },
+                { no_sp2d: { [Op.iLike]: `%${kampung}%` } },
+            ]
+    }
+    if (sts) where.sts = { [Op.eq]: `${sts}` }
+    if (sts_spp) where.sts_spp = { [Op.eq]: `${sts_spp}` }
+    if (sts_spm) where.sts_spm = { [Op.eq]: `${sts_spm}` }
+    if (sts_sp2d) where.sts_sp2d = { [Op.eq]: `${sts_sp2d}` }
     try {
-        if (distrik) where.distrik = { [Op.like]: `${distrik}` }
-        if (kd_kampung) where.kd_kampung = { [Op.eq]: `${kd_kampung}` }
-        if (kampung) where.kampung = { [Op.like]: `%${kampung.toUpperCase()}%` }
-        if (tgl_spp) where.tgl_spp = { [Op.eq]: `${tgl_spp}` }
-        if (tgl_spm) where.tgl_spm = { [Op.eq]: `${tgl_spm}` }
-        if (tgl_sp2d) where.tgl_sp2d = { [Op.eq]: `${tgl_sp2d}` }
-        if (kd_advis) where.kd_advis = { [Op.like]: `${kd_advis}` }
-
         const data = await v_anggaranB_qry.findAndCountAll({
             where,
-            offset: (pag - 1) * pag,
+            offset: (pag - 1) * per_pag,
             limit: per_pag,
+            //distinct: 'true' // untuk menghapus data double 
             order: [['distrik', 'ASC'], ['kampung', 'ASC']]
         });
+        //console.log('pagi', count, "rows", rows)
 
         const result = pagination({ data: data.rows, count: data.count, page: pag, per_page: per_pag });
-        if (data.count <= 0) {
+        if (data.count = 0) {
             res.status(404).send({
                 info: 'data tidak ditemukan'
             })
@@ -213,7 +391,6 @@ export const getAllAggaranB = async (req, res) => {
             status: 'berhasil',
             result
         });
-
     } catch (e) { res.json({ info: e.message }) }
 };
 
