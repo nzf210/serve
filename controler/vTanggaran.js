@@ -348,13 +348,14 @@ export const getAllAggaranB = async (req, res) => {
 
     // } catch (e) { res.json({ info: e.message }) }
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    const { distrik, kampung, kd_kampung, page, size, tgl_spp, tgl_spm, tgl_sp2d, kd_advis, id_kampung, sts, sts_spp, sts_spm, sts_sp2d } = req.query;
+    const { distrik, kampung, kd_kampung, page, size, tgl_spp, tgl_spm, tgl_sp2d, kd_advis, id_kampung, sts, sts_spp, sts_spm, sts_sp2d, kd_keg } = req.query;
     console.log('query', page, 'size', size, 'kampung', kampung, 'distrik', distrik, 'agReg')
     let where = {};
     const pag = page ? parseInt(page) : 1;
     const per_pag = size ? parseInt(size) : 20;
 
     if (kd_kampung) where.kd_kampung = { [Op.eq]: `${kd_kampung}` }
+    if (kd_keg) where.kd_keg = { [Op.eq]: `${kd_keg}` }
     if (distrik) where.distrik = { [Op.iLike]: `%${distrik}%` }
     if (kampung) where = {
         [Op.or]:
