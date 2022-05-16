@@ -12,9 +12,11 @@
 # production
 /build
 /data
-
 request_.rest
 request_ag.rest
+appin.id
+appin_.id
+
 
 # misc
 appin.id

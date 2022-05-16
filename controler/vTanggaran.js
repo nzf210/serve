@@ -44,12 +44,13 @@ export const getAllAggaran = async (req, res) => {
     //     });
     // } catch (e) { res.json({ info: e.message }) }
     const { distrik, kampung, kd_kampung, page, size, tgl_spp, tgl_spm, tgl_sp2d, kd_advis, id_kampung, sts, sts_spp, sts_spm, sts_sp2d, kd_keg } = req.query;
-    console.log('query', page, 'size', size, 'kampung', kampung, 'distrik', distrik, 'agReg')
+    //console.log('query', page, 'size', size, 'kampung', kampung, 'distrik', distrik, 'agReg')
     let where = {};
     const pag = page ? parseInt(page) : 1;
     const per_pag = size ? parseInt(size) : 20;
 
     if (kd_kampung) where.kd_kampung = { [Op.eq]: `${kd_kampung}` }
+    if (kd_keg) where.kd_keg = { [Op.eq]: `${kd_keg}` }
     if (distrik) where.distrik = { [Op.iLike]: `%${distrik}%` }
     if (kampung) where = {
         [Op.or]:
@@ -92,7 +93,7 @@ export const getAllAggaran = async (req, res) => {
 export const getAllAggaranReg = async (req, res) => {
 
     const { distrik, kampung, kd_kampung, page, size, tgl_spp, tgl_spm, tgl_sp2d, kd_advis, id_kampung, sts, sts_spp, sts_spm, sts_sp2d } = req.query;
-    console.log('query', page, 'size', size, 'kampung', kampung, 'distrik', distrik, 'agReg')
+    //console.log('query', page, 'size', size, 'kampung', kampung, 'distrik', distrik, 'agReg')
     let where = {};
     const pag = page ? parseInt(page) : 1;
     const per_pag = size ? parseInt(size) : 20;
@@ -266,7 +267,7 @@ export const getAllAggaranBlt = async (req, res) => {
     // } catch (e) { res.json({ info: e.message }) }
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     const { distrik, kampung, kd_kampung, page, size, tgl_spp, tgl_spm, tgl_sp2d, kd_advis, id_kampung, sts, sts_spp, sts_spm, sts_sp2d } = req.query;
-    console.log('query', page, 'size', size, 'kampung', kampung, 'distrik', distrik, 'agReg')
+    //console.log('query', page, 'size', size, 'kampung', kampung, 'distrik', distrik, 'agReg')
     let where = {};
     const pag = page ? parseInt(page) : 1;
     const per_pag = size ? parseInt(size) : 20;
@@ -349,7 +350,7 @@ export const getAllAggaranB = async (req, res) => {
     // } catch (e) { res.json({ info: e.message }) }
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     const { distrik, kampung, kd_kampung, page, size, tgl_spp, tgl_spm, tgl_sp2d, kd_advis, id_kampung, sts, sts_spp, sts_spm, sts_sp2d, kd_keg } = req.query;
-    console.log('query', page, 'size', size, 'kampung', kampung, 'distrik', distrik, 'agReg')
+    //console.log('query', page, 'size', size, 'kampung', kampung, 'distrik', distrik, 'agReg')
     let where = {};
     const pag = page ? parseInt(page) : 1;
     const per_pag = size ? parseInt(size) : 20;
@@ -381,22 +382,16 @@ export const getAllAggaranB = async (req, res) => {
             order: [['distrik', 'ASC'], ['kampung', 'ASC']]
         });
         //console.log('pagi', count, "rows", rows)
-
         const result = pagination({ data: data.rows, count: data.count, page: pag, per_page: per_pag });
         if (data.count = 0) {
-            res.status(404).send({
-                info: 'data tidak ditemukan'
-            })
+            res.status(404).send({ info: 'data tidak ditemukan' })
         }
-        res.status(200).send({
-            status: 'berhasil',
-            result
-        });
+        res.status(200).send({ status: 'berhasil', result });
     } catch (e) { res.json({ info: e.message }) }
 };
 
 export const getAnggaranById = async (req, res) => {
-    console.log('Query App', req.query)
+    //console.log('Query App', req.query)
     const { sts, kd_keg } = req.query;
     const kd_kampung = req.params.id;
     const where = {}
@@ -410,7 +405,7 @@ export const getAnggaranById = async (req, res) => {
     } catch (error) { res.json({ info: error.message }) }
 };
 export const getAnggaranByI = async (req, res) => {
-    console.log('Query App', req.query)
+    //console.log('Query App', req.query)
     const { sts, kd_keg, sts_spp } = req.query;
     const kd_kampung = req.params.id;
     const where = {}
