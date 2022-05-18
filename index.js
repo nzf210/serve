@@ -11,7 +11,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-if (process.env.titile === 'npm start') {
+if (process.env === 'production') {
     app.set('trust proxy', 1) // trust first proxy
 }
 // if (process.env === 'production') {
