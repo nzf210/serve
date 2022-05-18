@@ -11,6 +11,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+const port = process.env.PORT || 3002
 if (process.env === 'production') {
     app.set('trust proxy', 1) // trust first proxy
 }
@@ -61,4 +62,4 @@ app.use('/anggaran', cors(corsOptions), anggaran);
 app.use('/nodok', cors(corsOptions), nodok);
 app.get('/', (req, res) => { res.send('API DPMK'); });
 
-app.listen(3002, () => console.log('Serve Run !!!'));
+app.listen(port, () => console.log(`Serve Run !!! di Port ${port}`));
