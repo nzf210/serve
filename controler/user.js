@@ -129,7 +129,7 @@ export const Login = async (req, res) => {
 
         await user_qry.update({ refresh_token: refreshtoken }, { where: { id: id } });
         res.cookie('refreshtoken', refreshtoken, { maxAge: 24 * 60 * 60 * 100, httpOnly: true });
-        // res.cookie('refreshtoken', refreshtoken, { maxAge: 24 * 60 * 60 * 100, httpOnly: true , secure: true, domain: 'appin.id', sameSite: 'none'  });
+        //res.cookie('refreshtoken', refreshtoken, { maxAge: 24 * 60 * 60 * 100, httpOnly: true , secure: true, domain: 'appin.id', sameSite: 'none'  });
         res.json({ accestoken });
 
     } catch (e) {

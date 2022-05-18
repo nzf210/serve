@@ -7,7 +7,10 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "s": "nodemon index.js"
+    "s": "nodemon index.js",
+    "build": "mkdir dist && cp -R config controler middleware models routes index.js .env package.json package-lock.json dist",
+    "rb": "rmdir /Q /S dist && mkdir dist && cp -R config controler middleware models routes index.js .env package.json package-lock.json dist",
+    "build-s":"./dist/nodemon index.js"
   },
   "keywords": [],
   "author": "",
