@@ -19,13 +19,13 @@ if (process.env === 'production') {
 // }
 
 
-// try {
-//     await db.authenticate();
-//     //db.sync();
-//     console.log('Konek DB');
-// } catch (error) {
-//     console.log(error);
-// }
+try {
+    await db.authenticate();
+    //db.sync();
+    console.log('Konek DB');
+} catch (error) {
+    console.log(error);
+}
 
 const whitelist = ['http://127.0.0.1:3000', 'http://localhost:3000', 'http://localhost:3001', 'http://127.0.0.1:3001', 'http://202.157.176.42:3000', 'http://202.157.176.42:3001', 'http://202.157.176.42:3000',
     'http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'http://192.168.1.9:3000', 'http://202.157.176.42:3002', 'http://appin.id', 'https://appin.id', 'http://202.157.176.42',
@@ -53,12 +53,12 @@ app.use(function (req, res, next) {
 
 app.use(express.json());
 app.use(cookieParser());
-// app.use('/user', cors(corsOptions), user);
-// app.use('/mkamdis', cors(corsOptions), rkamdis);
-// app.use('/mbams', cors(corsOptions), rbams);
-// app.use('/ppengesahan', cors(corsOptions), pjbtPengesahan);
-// app.use('/anggaran', cors(corsOptions), anggaran);
-// app.use('/nodok', cors(corsOptions), nodok);
+app.use('/user', cors(corsOptions), user);
+app.use('/mkamdis', cors(corsOptions), rkamdis);
+app.use('/mbams', cors(corsOptions), rbams);
+app.use('/ppengesahan', cors(corsOptions), pjbtPengesahan);
+app.use('/anggaran', cors(corsOptions), anggaran);
+app.use('/nodok', cors(corsOptions), nodok);
 app.get('/', (req, res) => { res.send('API DPMK'); });
 
 app.listen(3002, () => console.log('Serve Run !!!'));
