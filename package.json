@@ -12,8 +12,7 @@
     "s": "nodemon index.js",
     "start": "node index.js",
     "build": "mkdir dist && cp -R config controler middleware models routes index.js package.json package-lock.json public",
-    "rb": "rmdir /Q /S dist && mkdir dist && cp -R config controler middleware models routes index.js package.json package-lock.json public",
-    "build-s":"./dist/nodemon index.js"
+    "rb": "rmdir /Q /S dist && mkdir dist && cp -R config controler middleware models routes index.js package.json package-lock.json public"
   },
   "keywords": [],
   "author": "",

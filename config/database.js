@@ -6,7 +6,8 @@ let usr = 'postgres'
 let pass = 'qwerty'
 let host = '127.0.0.1'
 let dbnm = 'app'
-if (process.env !== 'production') {
+console.log('env', process.title)
+if (process.title === 'npm start') {
     usr = process.env.DBUSER
     pass = process.env.DBPASS
     host = process.env.DBHOST
