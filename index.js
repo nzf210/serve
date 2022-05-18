@@ -11,9 +11,12 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-if (process.env === 'production') {
+if (process.env.titile === 'npm start') {
     app.set('trust proxy', 1) // trust first proxy
 }
+// if (process.env === 'production') {
+//     app.set('trust proxy', 1) // trust first proxy
+// }
 
 
 try {
@@ -50,12 +53,12 @@ app.use(function (req, res, next) {
 
 app.use(express.json());
 app.use(cookieParser());
-// app.use('/user', cors(corsOptions), user);
-// app.use('/mkamdis', cors(corsOptions), rkamdis);
-// app.use('/mbams', cors(corsOptions), rbams);
-// app.use('/ppengesahan', cors(corsOptions), pjbtPengesahan);
-// app.use('/anggaran', cors(corsOptions), anggaran);
-// app.use('/nodok', cors(corsOptions), nodok);
+app.use('/user', cors(corsOptions), user);
+app.use('/mkamdis', cors(corsOptions), rkamdis);
+app.use('/mbams', cors(corsOptions), rbams);
+app.use('/ppengesahan', cors(corsOptions), pjbtPengesahan);
+app.use('/anggaran', cors(corsOptions), anggaran);
+app.use('/nodok', cors(corsOptions), nodok);
 app.get('/', (req, res) => { res.send('API DPMK'); });
 
 app.listen(3002, () => console.log('Serve Run !!!'));
