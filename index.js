@@ -59,6 +59,6 @@ app.use('/mbams', cors(corsOptions), rbams);
 app.use('/ppengesahan', cors(corsOptions), pjbtPengesahan);
 app.use('/anggaran', cors(corsOptions), anggaran);
 app.use('/nodok', cors(corsOptions), nodok);
-app.get('/api/product', (req, res) => { res.send('API DPMK'); });
+app.get('/', (req, res) => { res.send('API DPMK'); });
 
 app.listen(3002, () => console.log('Serve Run !!!'));
