@@ -7,7 +7,6 @@
 /temp
 /.pnp
 .pnp.js
-
 # testing
 /coverage
 /dist
