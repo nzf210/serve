@@ -5,6 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import user, { rkamdis, rbams, pjbtPengesahan, anggaran, nodok } from "./routes/index.js";
+// import {tambah_ddscair_qry} from "./models/index.js"
 
 dotenv.config();
 const app = express();
@@ -23,14 +24,15 @@ if (process.env === 'production') {
 try {
     await db.authenticate();
     //db.sync();
-    console.log('Konek DB');
+    console.log('Konek DB Sukses!!!');
 } catch (error) {
     console.log(error);
 }
 
-const whitelist = ['http://127.0.0.1:3000', 'http://localhost:3000', 'http://localhost:3001', 'http://127.0.0.1:3001', 'http://202.157.176.42:3000', 'http://202.157.176.42:3001', 'http://202.157.176.42:3000',
+const whitelist = ['http://localhost:8080', 'http://127.0.0.1:8080', 'http://127.0.0.1', 'http://127.0.0.1:3000', 'http://localhost', 'http://localhost:3000', 'http://localhost:3001', 'http://127.0.0.1:3001', 'http://202.157.176.42:3000', 'http://202.157.176.42:3001', 'http://202.157.176.42:3000',
     'http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'http://192.168.1.9:3000', 'http://202.157.176.42:3002', 'http://appin.id', 'https://appin.id', 'http://202.157.176.42',
-    'https://dpmk.nzf.my.id/', 'https://dpmkapp-nzf210.vercel.app/', 'https://dpmkapp-nzf210.vercel.app', 'https://dpmkapp.vercel.app/', 'https://dpmkapp.vercel.app', 'https://dpmkapp-8w4ka9yx1-nzf210.vercel.app/', 'https://dpmkapp-8w4ka9yx1-nzf210.vercel.app'
+    'https://dpmk.nzf.my.id/', 'https://dpmkapp-nzf210.vercel.app/', 'https://dpmkapp-nzf210.vercel.app', 'https://dpmkapp.vercel.app/', 'https://dpmkapp.vercel.app', 'https://dpmkapp-8w4ka9yx1-nzf210.vercel.app/',
+    'https://dpmkapp-8w4ka9yx1-nzf210.vercel.app', 'https://dpmk.yhk/', 'http://dpmk.yhk', 'https://dpmk.yhk'
 
 ]
 

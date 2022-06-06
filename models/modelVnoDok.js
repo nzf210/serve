@@ -56,3 +56,14 @@ export const v_no_kamp_qry = db.define('v_no_dok_kampung', {
     timestamps: false
 })
 v_no_kamp_qry.removeAttribute('id');
+
+export const v_no_sp2ddds_qry = db.define('v_no_sp2d_gab', {
+    no_sp2d_gab: {
+        type: dt.INTEGER
+    },
+}, {
+    freezeTableName: true,
+    schema: 'web_dpmk',
+    timestamps: false
+})
+v_no_sp2ddds_qry.removeAttribute('id');

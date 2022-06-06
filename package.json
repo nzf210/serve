@@ -10,11 +10,10 @@
   },
   "scripts": {
     "s": "nodemon index.js",
-    "start": "node index.js",
-    "build": "node index.js",
+    "start": "node index.js && /build/http-server",
+    "build": "nexe index.js --build",
     "rb": "rmdir /Q /S dist && mkdir dist && cp -R config controler middleware models routes index.js package.json package-lock.json public",
-    "heroku-postbuild":"cd client && npm i && npm run build"
-
+    "heroku-postbuild": "cd client && npm i && npm run build"
   },
   "keywords": [],
   "author": "",

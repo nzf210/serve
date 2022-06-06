@@ -16,7 +16,7 @@ const v_anggaran_qry = db.define('v_t_anggaran', {
         type: dt.INTEGER
     },
     pagu: {
-        type: dt.INTEGER
+        type: dt.FLOAT
     },
     kd_kampung: {
         type: dt.INTEGER
@@ -156,7 +156,7 @@ export const v_anggaran_reg_qry = db.define('v_anggaran_reg', {
         type: dt.INTEGER
     },
     pagu: {
-        type: dt.INTEGER
+        type: dt.FLOAT
     },
     kd_kampung: {
         type: dt.INTEGER
@@ -316,7 +316,7 @@ export const v_anggaran_cov_qry = db.define('v_anggaran_cov', {
         type: dt.INTEGER
     },
     pagu: {
-        type: dt.INTEGER
+        type: dt.FLOAT
     },
     kd_kampung: {
         type: dt.INTEGER
@@ -476,7 +476,7 @@ export const v_anggaran_blt_qry = db.define('v_anggaran_blt', {
         type: dt.INTEGER
     },
     pagu: {
-        type: dt.INTEGER
+        type: dt.FLOAT
     },
     kd_kampung: {
         type: dt.INTEGER
@@ -637,7 +637,7 @@ export const t_anggaran_qry = db.define('t_keg', {
         type: dt.INTEGER
     },
     pagu: {
-        type: dt.INTEGER
+        type: dt.FLOAT
     },
     kd_kampung: {
         type: dt.STRING
@@ -709,7 +709,7 @@ export const v_anggaranB_qry = db.define('v_t_anggaran_bams', {
         type: dt.INTEGER
     },
     pagu: {
-        type: dt.INTEGER
+        type: dt.FLOAT
     },
     kd_kampung: {
         type: dt.STRING

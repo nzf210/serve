@@ -112,7 +112,6 @@ export const Login = async (req, res) => {
 
         const match = await bcrypt.compare(req.body.password, user[0].password);
         if (!match) return res.status(403).json({ info: "Password Salah" });
-
         const id = user[0].id;
         const nama = user[0].nama;
         const username = user[0].username;
@@ -128,12 +127,12 @@ export const Login = async (req, res) => {
         const refreshtoken = jwt.sign({ id, nama, username, email, nohp, kd_lvl1, kd_lvl2, kd_distrik, kd_kampung }, process.env.REFRESH_TOKEN, { expiresIn: '1d' });
 
         await user_qry.update({ refresh_token: refreshtoken }, { where: { id: id } });
-        res.cookie('refreshtoken', refreshtoken, { maxAge: 24 * 60 * 60 * 100, httpOnly: true });
+        res.cookie('refreshtoken', refreshtoken, { maxAge: 24 * 60 * 60 * 100 });
+        // res.cookie('refreshtoken', refreshtoken, { maxAge: 24 * 60 * 60 * 100, httpOnly: true });
         //res.cookie('refreshtoken', refreshtoken, { maxAge: 24 * 60 * 60 * 100, httpOnly: true , secure: true, domain: 'appin.id', sameSite: 'none'  });
         res.json({ accestoken });
-
     } catch (e) {
-        res.status(403).json({ info: "Username tidak terdaftar" })
+        res.status(403).json({ info: "Username tidak terdaftar !!!" })
     }
 }
 
