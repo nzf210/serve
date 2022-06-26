@@ -1,9 +1,6 @@
 import { Sequelize } from "sequelize";
 import db from "../config/database.js";
 //import mkampung_qry from "./model.mKampung.js";
-//import mdistrik_qry from "./model.mDistrik.js";
-import mkamdis_qry from "./model.mKamDis.js";
-import mlvluser_qry from "./model.mLevelUser.js";
 
 
 const { DataTypes } = Sequelize;

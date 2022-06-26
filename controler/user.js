@@ -14,6 +14,7 @@ export const getAllUser = async (req, res) => {
         res.json(datauser);
     } catch (e) { res.json({ info: e.message }) }
 };
+
 export const getUserId = async (req, res) => {
     try {
         const datauser = await v_user_qry.findAll({

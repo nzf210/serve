@@ -56,7 +56,9 @@ export const getAlldds_ = async (req, res) => {
                 //{ tgl_sp2d: { [Op.iLike]: `%${kampung}%` } },
                 { opt1: { [Op.iLike]: `%${kampung}%` } },
 
-            ]
+            ],
+        [Op.and]: { no_sp2d: { [Op.ne]: null } }
+
     }
     // if (sts) where.sts = { [Op.eq]: `${sts}` }
     // if (sts_spp) where.sts_spp = { [Op.eq]: `${sts_spp}` }

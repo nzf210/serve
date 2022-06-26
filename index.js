@@ -4,7 +4,7 @@ import db from "./config/database.js";
 import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import user, { rkamdis, rbams, pjbtPengesahan, anggaran, nodok } from "./routes/index.js";
+import user, { rkamdis, rbams, pjbtPengesahan, anggaran, nodok, vLaporan } from "./routes/index.js";
 // import {tambah_ddscair_qry} from "./models/index.js"
 
 dotenv.config();
@@ -62,6 +62,7 @@ app.use('/mbams', cors(corsOptions), rbams);
 app.use('/ppengesahan', cors(corsOptions), pjbtPengesahan);
 app.use('/anggaran', cors(corsOptions), anggaran);
 app.use('/nodok', cors(corsOptions), nodok);
+app.use('/laporan', cors(corsOptions), vLaporan);
 app.get('/', (req, res) => { res.send('API DPMK'); });
 
 app.listen(port, () => console.log(`Serve Run !!! di Port ${port}`));
