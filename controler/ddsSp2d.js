@@ -45,13 +45,14 @@ export const getAlldds_ = async (req, res) => {
 
     //if (kd_kampung) where.kd_kampung = { [Op.eq]: `${kd_kampung}` }
     //if (kd_keg) where.kd_keg = { [Op.eq]: `${kd_keg}` }
+    console.log('no sp2d => ', no_sp2d)
     if (no_sp2d) where.no_sp2d = { [Op.ne]: null }
     if (kampung) where = {
         [Op.or]:
             [
                 { kampung: { [Op.iLike]: `%${kampung}%` } },
                 { distrik: { [Op.iLike]: `%${kampung}%` } },
-                { no_sp2d: { [Op.iLike]: `%${kampung}%` } },
+                //{ no_sp2d: { [Op.iLike]: `%${kampung}%` } },
                 //{ tgl_sp2d: { [Op.iLike]: `%${kampung}%` } },
                 { opt1: { [Op.iLike]: `%${kampung}%` } },
 
