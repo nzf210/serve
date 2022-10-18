@@ -1,7 +1,7 @@
 import express from "express";
-import { getallKadis } from "../controler/index.js";
+import { getKadis } from "../controler/index.js";
 
 const kadis = express();
-kadis.post('/', getallKadis);
+kadis.get('/', getKadis);
 
 export default kadis;

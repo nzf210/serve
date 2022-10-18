@@ -1,4 +1,4 @@
-import { kadis_qry } from "../models/kadis.js";
+import kadis_qry from "../models/model.kadis.js";
 
 // Path: controler\kadis.js
 
