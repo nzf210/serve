@@ -83,7 +83,6 @@ export const getAllAggaranReg = async (req, res) => {
             //distinct: 'true' // untuk menghapus data double 
             order: [['distrik', 'ASC'], ['kampung', 'ASC']]
         });
-        //console.log('pagi', count, "rows", rows)
 
         const result = pagination({ data: data.rows, count: data.count, page: pag, per_page: per_pag });
         if (data.count = 0) {

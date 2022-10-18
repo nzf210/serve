@@ -305,6 +305,7 @@ export const v_anggaran_reg_qry = db.define('v_anggaran_reg', {
     schema: 'web_dpmk',
     timestamps: false
 })
+
 export const v_anggaran_cov_qry = db.define('v_anggaran_cov', {
     id: {
         allowNull: false,
